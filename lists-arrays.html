@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Static vs Dynamic Data Structures - Interactive Lesson</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+    background:#f4f7fb;
+    color:#222;
+    line-height:1.7;
+}
+
+header{
+    background:#4F46E5;
+    color:white;
+    padding:30px;
+    text-align:center;
+}
+
+header h1{
+    font-size:36px;
+    margin-bottom:10px;
+}
+
+.container{
+    width:92%;
+    max-width:1300px;
+    margin:20px auto;
+}
+
+.card{
+    background:white;
+    padding:25px;
+    margin-bottom:25px;
+    border-radius:14px;
+    box-shadow:0 4px 10px rgba(0,0,0,0.08);
+}
+
+h2{
+    color:#4F46E5;
+    margin-bottom:15px;
+}
+
+h3{
+    margin-top:20px;
+    margin-bottom:10px;
+    color:#333;
+}
+
+p{
+    margin-bottom:10px;
+}
+
+ul{
+    padding-left:20px;
+}
+
+li{
+    margin-bottom:8px;
+}
+
+.code{
+    background:#111827;
+    color:#10B981;
+    padding:15px;
+    border-radius:10px;
+    overflow-x:auto;
+    margin-top:10px;
+    font-family:monospace;
+    white-space:pre-wrap;
+}
+
+.output{
+    background:#1f2937;
+    color:#f9fafb;
+    padding:15px;
+    border-radius:10px;
+    margin-top:10px;
+}
+
+button{
+    padding:10px 18px;
+    border:none;
+    border-radius:8px;
+    background:#4F46E5;
+    color:white;
+    cursor:pointer;
+    margin-top:10px;
+    margin-right:10px;
+    transition:0.3s;
+}
+
+button:hover{
+    background:#312e81;
+}
+
+input{
+    padding:10px;
+    width:220px;
+    border-radius:8px;
+    border:1px solid #ccc;
+    margin-top:10px;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:15px;
+}
+
+table th,
+table td{
+    border:1px solid #ddd;
+    padding:12px;
+    text-align:left;
+}
+
+table th{
+    background:#4F46E5;
+    color:white;
+}
+
+.index-container{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-top:15px;
+}
+
+.box{
+    width:70px;
+    height:70px;
+    background:#10B981;
+    color:white;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    border-radius:10px;
+    transition:0.3s;
+    font-weight:bold;
+}
+
+.box:hover{
+    transform:scale(1.05);
+}
+
+.index{
+    margin-top:5px;
+    font-size:12px;
+    background:rgba(255,255,255,0.2);
+    padding:2px 5px;
+    border-radius:4px;
+}
+
+.highlight{
+    background:#F59E0B;
+}
+
+textarea{
+    width:100%;
+    height:350px;
+    margin-top:15px;
+    padding:15px;
+    border-radius:10px;
+    border:1px solid #ccc;
+    font-family:monospace;
+    resize:vertical;
+}
+
+footer{
+    text-align:center;
+    padding:25px;
+    color:#666;
+}
+
+.correct{
+    color:green;
+    font-weight:bold;
+}
+
+.wrong{
+    color:red;
+    font-weight:bold;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>Static vs Dynamic Data Structures</h1>
+    <p>Interactive Python Lesson</p>
+</header>
+
+<div class="container">
+
+<!-- LEARNING OBJECTIVES -->
+
+<div class="card">
+
+<h2>Learning Objectives</h2>
+
+<ul>
+    <li>Differentiate between static (Arrays) and dynamic (Lists) data structures.</li>
+    <li>Understand zero-based indexing in sequences.</li>
+    <li>Apply built-in methods such as sort(), reverse(), insert(), append(), remove() and pop().</li>
+</ul>
+
+</div>
+
+<!-- INDEXING -->
+
+<div class="card">
+
+<h2>1. The Concept of Indexing</h2>
+
+<p>
+Strings and arrays are sequences of characters or values.
+Computers start counting from <strong>0</strong>. This is called
+<strong>Zero-Based Indexing</strong>.
+</p>
+
+<h3>HELLOWORLD Example</h3>
+
+<div class="index-container" id="wordBoxes"></div>
+
+<button onclick="highlightNext()">Highlight Next Index</button>
+
+<div class="output" id="indexOutput">
+Click the button to explore indexing.
+</div>
+
+<h3>Key Term</h3>
+
+<p><strong>Element:</strong> An individual item in a sequence.</p>
+
+</div>
+
+<!-- ARRAYS VS LISTS -->
+
+<div class="card">
+
+<h2>2. Arrays vs Lists</h2>
+
+<table>
+
+<tr>
+    <th>Feature</th>
+    <th>Array (Static)</th>
+    <th>List (Dynamic)</th>
+</tr>
+
+<tr>
+    <td>Size</td>
+    <td>Fixed</td>
+    <td>Flexible</td>
+</tr>
+
+<tr>
+    <td>Can Grow?</td>
+    <td>No</td>
+    <td>Yes</td>
+</tr>
+
+<tr>
+    <td>Can Shrink?</td>
+    <td>No</td>
+    <td>Yes</td>
+</tr>
+
+<tr>
+    <td>Example</td>
+    <td>12-Month Calendar</td>
+    <td>Guest List</td>
+</tr>
+
+</table>
+
+<h3>Python Array Example</h3>
+
+<div class="code">
+from array import *
+
+numbers = array('i', [10, 20, 30, 40])
+
+print(numbers)
+</div>
+
+<h3>Python List Example</h3>
+
+<div class="code">
+numbers = [10, 20, 30, 40]
+
+print(numbers)
+</div>
+
+<button onclick="showArray()">Show Array Info</button>
+<button onclick="showList()">Show List Info</button>
+
+<div class="output" id="arrayListOutput"></div>
+
+</div>
+
+<!-- WHILE LOOP -->
+
+<div class="card">
+
+<h2>3. Reviewing the “Numbers” Program</h2>
+
+<div class="code">
+Numbers = [6, 49, 33, 8, 72, 1060, 198]
+
+counter = 0
+
+while counter < len(Numbers):
+    print(Numbers[counter])
+    counter += 1
+</div>
+
+<h3>Explanation</h3>
+
+<ul>
+    <li>The counter starts from 0.</li>
+    <li>The loop moves through each index position.</li>
+    <li>counter += 1 increases the counter by 1.</li>
+    <li>len(Numbers) gives the total number of elements.</li>
+</ul>
+
+<button onclick="runLoopDemo()">Run Loop Demo</button>
+
+<div class="output" id="loopOutput"></div>
+
+</div>
+
+<!-- LIST METHODS -->
+
+<div class="card">
+
+<h2>4. Python List Methods</h2>
+
+<table>
+
+<tr>
+    <th>Method</th>
+    <th>Description</th>
+    <th>Example</th>
+</tr>
+
+<tr>
+    <td>append()</td>
+    <td>Adds an item at the end</td>
+    <td>numbers.append(50)</td>
+</tr>
+
+<tr>
+    <td>insert()</td>
+    <td>Inserts item at specific position</td>
+    <td>numbers.insert(0, 100)</td>
+</tr>
+
+<tr>
+    <td>sort()</td>
+    <td>Sorts list in ascending order</td>
+    <td>numbers.sort()</td>
+</tr>
+
+<tr>
+    <td>reverse()</td>
+    <td>Reverses current order</td>
+    <td>numbers.reverse()</td>
+</tr>
+
+<tr>
+    <td>remove()</td>
+    <td>Removes specific item</td>
+    <td>numbers.remove(10)</td>
+</tr>
+
+<tr>
+    <td>pop()</td>
+    <td>Removes last item</td>
+    <td>numbers.pop()</td>
+</tr>
+
+<tr>
+    <td>len()</td>
+    <td>Returns total elements</td>
+    <td>len(numbers)</td>
+</tr>
+
+</table>
+
+<h3>Method Demonstration</h3>
+
+<div class="output" id="methodOutput">
+[6, 49, 33, 8, 72, 1060, 198]
+</div>
+
+<button onclick="sortNumbers()">sort()</button>
+<button onclick="reverseNumbers()">reverse()</button>
+<button onclick="appendNumber()">append()</button>
+<button onclick="insertNumber()">insert()</button>
+<button onclick="removeNumber()">remove()</button>
+<button onclick="popNumber()">pop()</button>
+<button onclick="resetMethods()">Reset</button>
+
+</div>
+
+<!-- PRINT FORMAT -->
+
+<div class="card">
+
+<h2>5. Formatting Output Using end=" "</h2>
+
+<h3>Without end=" "</h3>
+
+<div class="code">
+print(5)
+print(10)
+</div>
+
+<div class="output">
+5 <br>
+10
+</div>
+
+<h3>With end=" "</h3>
+
+<div class="code">
+print(5, end=" ")
+print(10)
+</div>
+
+<div class="output">
+5 10
+</div>
+
+</div>
+
+<!-- PRACTICAL ACTIVITY -->
+
+<div class="card">
+
+<h2>6. Practical Activity — “Input 10” Challenge</h2>
+
+<h3>Step 1 — Input Loop</h3>
+
+<div class="code">
+MyNumbers = []
+counter = 0
+
+while counter < 10:
+    MyNumbers.insert(counter, input('Input Number: '))
+    counter += 1
+</div>
+
+<h3>Alternative Using append()</h3>
+
+<div class="code">
+MyNumbers = []
+counter = 0
+
+while counter < 10:
+    MyNumbers.append(input('Input Number: '))
+    counter += 1
+</div>
+
+<h3>Interactive Practice</h3>
+
+<input type="number" id="userInput" placeholder="Enter number">
+<button onclick="addUserNumber()">Add Number</button>
+
+<div class="output" id="userListOutput">
+Your list will appear here...
+</div>
+
+<button onclick="sortUserList()">Sort List</button>
+<button onclick="reverseUserList()">Reverse List</button>
+<button onclick="clearUserList()">Clear List</button>
+
+</div>
+
+<!-- OUTPUT LOOP -->
+
+<div class="card">
+
+<h2>7. Output Loop Example</h2>
+
+<div class="code">
+counter = 0
+
+while counter < len(MyNumbers):
+    print(MyNumbers[counter], end=" ")
+    counter += 1
+</div>
+
+</div>
+
+<!-- COMPLETE PROGRAM -->
+
+<div class="card">
+
+<h2>8. Complete Python Program</h2>
+
+<textarea readonly>
+MyNumbers = []
+counter = 0
+
+while counter < 10:
+    number = int(input('Input Number: '))
+    MyNumbers.append(number)
+    counter += 1
+
+print("\nOriginal List:")
+
+counter = 0
+
+while counter < len(MyNumbers):
+    print(MyNumbers[counter], end=" ")
+    counter += 1
+
+MyNumbers.sort()
+
+print("\n\nSorted List:")
+
+counter = 0
+
+while counter < len(MyNumbers):
+    print(MyNumbers[counter], end=" ")
+    counter += 1
+
+MyNumbers.reverse()
+
+print("\n\nReversed List:")
+
+counter = 0
+
+while counter < len(MyNumbers):
+    print(MyNumbers[counter], end=" ")
+    counter += 1
+</textarea>
+
+</div>
+
+<!-- TERMINOLOGY -->
+
+<div class="card">
+
+<h2>9. Terminology Review</h2>
+
+<h3>Brackets / Parentheses</h3>
+
+<p>Brackets and parentheses must always be balanced.</p>
+
+<div class="code">
+Correct:
+print("Hello")
+
+Incorrect:
+print("Hello"
+</div>
+
+<h3>Static vs Dynamic</h3>
+
+<table>
+
+<tr>
+    <th>Situation</th>
+    <th>Best Choice</th>
+</tr>
+
+<tr>
+    <td>Guest list that changes</td>
+    <td>Dynamic List</td>
+</tr>
+
+<tr>
+    <td>Fixed 12-month calendar</td>
+    <td>Static Array</td>
+</tr>
+
+</table>
+
+<h3>Compiler</h3>
+
+<p>
+A compiler translates Python code into machine language
+that the computer hardware understands.
+</p>
+
+</div>
+
+<!-- QUIZ -->
+
+<div class="card">
+
+<h2>10. Quick Check Quiz</h2>
+
+<p>
+If a list has 5 elements, what is the index number of the very last element?
+</p>
+
+<button onclick="checkAnswer(3)">3</button>
+<button onclick="checkAnswer(4)">4</button>
+<button onclick="checkAnswer(5)">5</button>
+
+<div id="quizResult" style="margin-top:15px;"></div>
+
+</div>
+
+<!-- HOMEWORK -->
+
+<div class="card">
+
+<h2>11. Homework / Extension Activity</h2>
+
+<p>Write a Python program that:</p>
+
+<ul>
+    <li>Accepts 5 names from the user.</li>
+    <li>Stores them in a list.</li>
+    <li>Prints the names in:</li>
+    <ul>
+        <li>Original order</li>
+        <li>Alphabetical order</li>
+        <li>Reverse order</li>
+    </ul>
+</ul>
+
+</div>
+
+</div>
+
+<footer>
+Interactive Lesson — Static vs Dynamic Data Structures
+</footer>
+
+<script>
+
+const word = "HELLOWORLD";
+const wordBoxes = document.getElementById("wordBoxes");
+
+let currentIndex = -1;
+
+for(let i = 0; i < word.length; i++){
+
+    const box = document.createElement("div");
+
+    box.className = "box";
+
+    box.innerHTML = `
+        ${word[i]}
+        <div class="index">${i}</div>
+    `;
+
+    wordBoxes.appendChild(box);
+}
+
+function highlightNext(){
+
+    const boxes = document.querySelectorAll(".box");
+
+    boxes.forEach(box=>{
+        box.classList.remove("highlight");
+    });
+
+    currentIndex++;
+
+    if(currentIndex >= boxes.length){
+        currentIndex = 0;
+    }
+
+    boxes[currentIndex].classList.add("highlight");
+
+    document.getElementById("indexOutput").innerHTML =
+    `Character "${word[currentIndex]}" is at index ${currentIndex}`;
+}
+
+function showArray(){
+
+    document.getElementById("arrayListOutput").innerHTML =
+    `
+    Array Example:<br><br>
+    numbers = array('i', [10, 20, 30])<br><br>
+    Fixed size. Cannot easily grow or shrink.
+    `;
+}
+
+function showList(){
+
+    document.getElementById("arrayListOutput").innerHTML =
+    `
+    List Example:<br><br>
+    numbers = [10, 20, 30]<br><br>
+    Dynamic size. Can add or remove elements anytime.
+    `;
+}
+
+function runLoopDemo(){
+
+    let numbers = [6,49,33,8,72,1060,198];
+
+    let output = "";
+
+    let counter = 0;
+
+    while(counter < numbers.length){
+
+        output += `
+        counter = ${counter} → value = ${numbers[counter]}<br>
+        `;
+
+        counter++;
+    }
+
+    document.getElementById("loopOutput").innerHTML = output;
+}
+
+let methodNumbers = [6,49,33,8,72,1060,198];
+
+function updateMethods(){
+
+    document.getElementById("methodOutput").innerHTML =
+    JSON.stringify(methodNumbers);
+}
+
+function sortNumbers(){
+
+    methodNumbers.sort((a,b)=>a-b);
+
+    updateMethods();
+}
+
+function reverseNumbers(){
+
+    methodNumbers.reverse();
+
+    updateMethods();
+}
+
+function appendNumber(){
+
+    methodNumbers.append;
+
+    methodNumbers.push(500);
+
+    updateMethods();
+}
+
+function insertNumber(){
+
+    methodNumbers.splice(0,0,999);
+
+    updateMethods();
+}
+
+function removeNumber(){
+
+    methodNumbers = methodNumbers.filter(num => num !== 49);
+
+    updateMethods();
+}
+
+function popNumber(){
+
+    methodNumbers.pop();
+
+    updateMethods();
+}
+
+function resetMethods(){
+
+    methodNumbers = [6,49,33,8,72,1060,198];
+
+    updateMethods();
+}
+
+let userNumbers = [];
+
+function addUserNumber(){
+
+    const input = document.getElementById("userInput");
+
+    if(input.value === ""){
+        alert("Please enter a number");
+        return;
+    }
+
+    userNumbers.push(Number(input.value));
+
+    updateUserList();
+
+    input.value = "";
+}
+
+function updateUserList(){
+
+    document.getElementById("userListOutput").innerHTML =
+    JSON.stringify(userNumbers);
+}
+
+function sortUserList(){
+
+    userNumbers.sort((a,b)=>a-b);
+
+    updateUserList();
+}
+
+function reverseUserList(){
+
+    userNumbers.reverse();
+
+    updateUserList();
+}
+
+function clearUserList(){
+
+    userNumbers = [];
+
+    updateUserList();
+}
+
+function checkAnswer(answer){
+
+    const result = document.getElementById("quizResult");
+
+    if(answer === 4){
+
+        result.innerHTML =
+        `<span class="correct">✅ Correct! Indexing starts from 0.</span>`;
+
+    }else{
+
+        result.innerHTML =
+        `<span class="wrong">❌ Incorrect. Try Again.</span>`;
+    }
+}
+
+</script>
+
+</body>
+</html>
