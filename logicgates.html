@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Lesson: Boolean Logic & Logic Gates</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --secondary: #64748b;
+            --success: #22c55e;
+            --danger: #ef4444;
+            --bg: #f8fafc;
+            --card: #ffffff;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            background-color: var(--bg);
+            color: #1e293b;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            background: var(--primary);
+            color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+        }
+
+        .section {
+            background: var(--card);
+            padding: 2rem;
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
+            border-left: 5px solid var(--primary);
+        }
+
+        h2 { color: var(--primary); margin-top: 0; }
+        h3 { color: var(--secondary); border-bottom: 1px solid #e2e8f0; padding-bottom: 0.5rem; }
+
+        .hook-box {
+            background: #dbeafe;
+            padding: 1rem;
+            border-radius: 8px;
+            font-style: italic;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            text-align: center;
+        }
+
+        th, td {
+            border: 1px solid #e2e8f0;
+            padding: 10px;
+        }
+
+        th { background: #f1f5f9; }
+
+        .gate-card {
+            border: 1px solid #e2e8f0;
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+            transition: transform 0.2s;
+        }
+
+        .gate-card:hover { transform: translateY(-5px); }
+
+        .gate-img {
+            width: 120px;
+            height: 60px;
+            margin: 10px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            border: 2px solid #334155;
+        }
+
+        /* SVG Gate Styles */
+        .gate-svg { width: 100px; height: 50px; }
+
+        .interactive-tool {
+            background: #f1f5f9;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+        }
+
+        .btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .btn:hover { opacity: 0.9; }
+
+        .result-box {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 4px;
+            display: inline-block;
+        }
+
+        .status-true { color: var(--success); }
+        .status-false { color: var(--danger); }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>Boolean Logic & Logic Gates</h1>
+        <p>Subject: Computer Science (Introductory) | Duration: 45 Minutes</p>
+    </header>
+
+    <!-- Learning Objectives -->
+    <div class="section">
+        <h2>Learning Objectives</h2>
+        <ul>
+            <li>Define the three main Boolean operators: <strong>AND, OR, and NOT</strong>.</li>
+            <li>Evaluate Boolean expressions as <strong>True (1)</strong> or <strong>False (0)</strong>.</li>
+            <li>Identify and draw standard symbols for <strong>Logic Gates</strong>.</li>
+        </ul>
+    </div>
+
+    <!-- 1. Introduction -->
+    <div class="section">
+        <h2>1. The Language of Computers</h2>
+        <div class="hook-box">
+            <strong>Discussion:</strong> "How does your phone know to unlock only when both Face ID is correct AND you swipe up?"
+        </div>
+        <p>Computers make decisions using <strong>Boolean Logic</strong>. Every operation is based on just two values:</p>
+        <ul>
+            <li><strong>1</strong> = True</li>
+            <li><strong>0</strong> = False</li>
+        </ul>
+    </div>
+
+    <!-- 2. Core Operators -->
+    <div class="section">
+        <h2>2. The Core Operators</h2>
+        
+        <h3>A. AND Operator (The Strict Operator)</h3>
+        <p><strong>Rule:</strong> Both conditions must be TRUE.</p>
+        <p><em>Example:</em> To be a Samsung Phone, it must: (Be a phone) AND (Be made by Samsung).</p>
+        
+        <div class="interactive-tool">
+            <label>Input A: </label>
+            <select id="andA" onchange="calcAND()">
+                <option value="0">0 (False)</option>
+                <option value="1">1 (True)</option>
+            </select>
+            <label>Input B: </label>
+            <select id="andB" onchange="calcAND()">
+                <option value="0">0 (False)</option>
+                <option value="1">1 (True)</option>
+            </select>
+            <div id="andRes" class="result-box">Result: 0</div>
+        </div>
+
+        <h3>B. OR Operator (The Generous Operator)</h3>
+        <p><strong>Rule:</strong> At least one condition must be TRUE.</p>
+        <p><em>Example:</em> A device is TRUE if it is: (A phone) OR (Made by Samsung).</p>
+
+        <div class="interactive-tool">
+            <label>Input A: </label>
+            <select id="orA" onchange="calcOR()">
+                <option value="0">0 (False)</option>
+                <option value="1">1 (True)</option>
+            </select>
+            <label>Input B: </label>
+            <select id="orB" onchange="calcOR()">
+                <option value="0">0 (False)</option>
+                <option value="1">1 (True)</option>
+            </select>
+            <div id="orRes" class="result-box">Result: 0</div>
+        </div>
+
+        <h3>C. NOT Operator (The Inverter)</h3>
+        <p><strong>Rule:</strong> It reverses the result.</p>
+        <p><em>Example:</em> NOT Samsung means any brand except Samsung.</p>
+
+        <div class="interactive-tool">
+            <label>Input A: </label>
+            <select id="notA" onchange="calcNOT()">
+                <option value="0">0 (False)</option>
+                <option value="1">1 (True)</option>
+            </select>
+            <div id="notRes" class="result-box">Result: 1</div>
+        </div>
+    </div>
+
+    <!-- 3. Human Logic Gate Activity -->
+    <div class="section" style="background: #fff7ed; border-left-color: #f97316;">
+        <h2>3. Activity: Human Logic Gates</h2>
+        <div class="grid">
+            <div class="gate-card">
+                <strong>Scenario A (AND)</strong>
+                <p>"Stand up if you are wearing a watch AND white shoes."</p>
+            </div>
+            <div class="gate-card">
+                <strong>Scenario B (OR)</strong>
+                <p>"Stand up if you are wearing a watch OR white shoes."</p>
+            </div>
+            <div class="gate-card">
+                <strong>Scenario C (NOT)</strong>
+                <p>"Stand up if you are NOT wearing glasses."</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 4. Visualizing Logic Gates -->
+    <div class="section">
+        <h2>4. Visualizing Logic: The Gates</h2>
+        <p>Use the <strong>D-O-T</strong> Memory Trick:</p>
+        <div class="grid">
+            <div class="gate-card">
+                <h3>AND Gate</h3>
+                <svg class="gate-svg" viewBox="0 0 100 50">
+                    <path d="M20,10 L50,10 A20,20 0 0,1 50,40 L20,40 Z" fill="none" stroke="black" stroke-width="2"/>
+                    <line x1="0" y1="15" x2="20" y2="15" stroke="black" />
+                    <line x1="0" y1="35" x2="20" y2="35" stroke="black" />
+                    <line x1="70" y1="25" x2="100" y2="25" stroke="black" />
+                </svg>
+                <p><strong>D</strong> for AND (Looks like D)</p>
+            </div>
+            <div class="gate-card">
+                <h3>OR Gate</h3>
+                <svg class="gate-svg" viewBox="0 0 100 50">
+                    <path d="M20,10 Q40,10 50,10 Q80,25 50,40 Q40,40 20,40 Q30,25 20,10" fill="none" stroke="black" stroke-width="2"/>
+                    <line x1="0" y1="15" x2="22" y2="15" stroke="black" />
+                    <line x1="0" y1="35" x2="22" y2="35" stroke="black" />
+                    <line x1="72" y1="25" x2="100" y2="25" stroke="black" />
+                </svg>
+                <p><strong>O</strong> for OR (Curved shape)</p>
+            </div>
+            <div class="gate-card">
+                <h3>NOT Gate</h3>
+                <svg class="gate-svg" viewBox="0 0 100 50">
+                    <path d="M30,10 L60,25 L30,40 Z" fill="none" stroke="black" stroke-width="2"/>
+                    <circle cx="65" cy="25" r="4" fill="none" stroke="black" stroke-width="2"/>
+                    <line x1="0" y1="25" x2="30" y2="25" stroke="black" />
+                    <line x1="69" y1="25" x2="100" y2="25" stroke="black" />
+                </svg>
+                <p><strong>T</strong> for NOT (Bottom triangle)</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 5. Review & Create -->
+    <div class="section">
+        <h2>5. Review & Student Task</h2>
+        <p><strong>Challenge:</strong> Draw a circuit representing <code>(A AND B) OR C</code></p>
+        <div class="interactive-tool">
+            <p><strong>Logic Simulator:</strong> Try the values below!</p>
+            <label>A:</label> <input type="checkbox" id="exA"> 
+            <label>B:</label> <input type="checkbox" id="exB"> 
+            <label>C:</label> <input type="checkbox" id="exC">
+            <button class="btn" onclick="testExpression()">Check Output</button>
+            <div id="finalRes" class="result-box">Result: ?</div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function calcAND() {
+        const a = document.getElementById('andA').value;
+        const b = document.getElementById('andB').value;
+        const res = (a == 1 && b == 1) ? 1 : 0;
+        const el = document.getElementById('andRes');
+        el.innerText = "Result: " + res;
+        el.className = "result-box " + (res == 1 ? "status-true" : "status-false");
+    }
+
+    function calcOR() {
+        const a = document.getElementById('orA').value;
+        const b = document.getElementById('orB').value;
+        const res = (a == 1 || b == 1) ? 1 : 0;
+        const el = document.getElementById('orRes');
+        el.innerText = "Result: " + res;
+        el.className = "result-box " + (res == 1 ? "status-true" : "status-false");
+    }
+
+    function calcNOT() {
+        const a = document.getElementById('notA').value;
+        const res = (a == 1) ? 0 : 1;
+        const el = document.getElementById('notRes');
+        el.innerText = "Result: " + res;
+        el.className = "result-box " + (res == 1 ? "status-true" : "status-false");
+    }
+
+    function testExpression() {
+        const a = document.getElementById('exA').checked;
+        const b = document.getElementById('exB').checked;
+        const c = document.getElementById('exC').checked;
+        
+        // (A AND B) OR C
+        const result = (a && b) || c;
+        const el = document.getElementById('finalRes');
+        el.innerText = "Output: " + (result ? "1 (True)" : "0 (False)");
+        el.className = "result-box " + (result ? "status-true" : "status-false");
+    }
+
+    // Initialize displays
+    calcAND(); calcOR(); calcNOT();
+</script>
+
+</body>
+</html>
